@@ -15,10 +15,6 @@ const jsonString =`
 }
 `;
 
-const data = JSON.parse(jsonString);
-
-const result = {
-    list: data.list
-};
+const result = JSON.parse(jsonString);
 
 console.log('result', result);
