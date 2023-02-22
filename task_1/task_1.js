@@ -32,35 +32,10 @@ const ageNode = studentNode.querySelector("age");
 const profNode = studentNode.querySelector("prof");
 
 
-// console.log('listNode', listNode);
-// console.log('studentNode',studentNode);
-// console.log('nameNode',nameNode);
-// console.log('firstNode',firstNode);
-// console.log('secondNode',secondNode);
-// console.log('ageNode',ageNode);
 
 const langAttr = nameNode.getAttribute('lang');
 
-// console.log('langAttr', langAttr);
 
-// const result = {
-//   lang: langAttr,
-//   first: firstNode.textContent,
-//   second: secondNode.textContent,
-//   age: ageNode.textContent,
-//   prof: profNode.textContent
-// };
-// console.log('result', result);
-
-
-// const result = {
-//   list: [ {lang: langAttr,
-//          first: firstNode.textContent,
-//          second: secondNode.textContent,
-//          age: ageNode.textContent,
-//          prof: profNode.textContent}]
-// }
-// console.log('result', result);
 
 const result = {
     list: [{
