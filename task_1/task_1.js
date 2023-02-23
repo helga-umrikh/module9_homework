@@ -1,3 +1,5 @@
+
+
 const parser = new DOMParser();
 
 const xmlString = `
@@ -25,6 +27,10 @@ const xmlDOM = parser.parseFromString(xmlString, "text/xml");
 
 const listNode = xmlDOM.querySelector("list");
 const studentNode = listNode.querySelector("student");
+
+
+
+
 const nameNode = studentNode.querySelector("name");
 const firstNode = nameNode.querySelector("first");
 const secondNode = nameNode.querySelector("second");
@@ -32,8 +38,13 @@ const ageNode = studentNode.querySelector("age");
 const profNode = studentNode.querySelector("prof");
 
 
+const nextStudent = studentNode.nextElementSibling
 
-const langAttr = nameNode.getAttribute('lang');
+const nameNodeSibling = nextStudent.querySelector('name')
+const firstNodeSibling = nameNodeSibling.querySelector('first')
+const secondNodeSibling = nameNodeSibling.querySelector('second')
+const ageNodeSibling = nextStudent.querySelector('age')
+const profNodeSibling = nextStudent.querySelector("prof");
 
 
 
@@ -41,14 +52,13 @@ const result = {
     list: [{
         name: `${firstNode.textContent} ${secondNode.textContent}`,
         age: ageNode.textContent,
-        prof: profNode.textContent
-    }],
-
-    list: [{
-        name: `${firstNode.textContent} ${secondNode.textContent}`,
-        age: ageNode.textContent,
-        prof: profNode.textContent
+        prof: profNode.textContent,
+    },
+    {
+        name: `${firstNodeSibling.textContent} ${secondNodeSibling.textContent}`,
+        age: ageNodeSibling.textContent,
+        prof: profNodeSibling.textContent
     }]
 }
 
-console.log('result', result);
+console.log(result);
