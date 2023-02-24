@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./task_4.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
-
 <body>
-    <div class='Numberbox'>
-        <label class="label" for="Number">Number</label>
-        <input class='input' type="number" id="tentacles" name="tentacles" placeholder="Enter the various number"></input>
-        <input class='input' type="number" id="tentacles" name="tentacles" placeholder="Enter the various number"></input>
-        <input class='submit' type="submit" value="Submit"></input>
-    </div>
-</body>
+    <h1>Number</h1>
+    <input id="input" type="text" placeholder="Введите первое число" />
+    <input id="secondInput" type="text" placeholder="Введите второе число" >
+    <button class="btn j-btn-request">Запрашиваем данные</button>
 
+    <div class="result j-result">Здесь будет результат запроса</div>
+    <script src="./task_4.js"></script>
+</body>
 </html>
