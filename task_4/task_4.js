@@ -21,17 +21,13 @@ function get_random_image(){
       let validated = true;
       if ((input.value === '' || isNaN(+input.value)) && 
           (secondInput.value === '' || isNaN(+secondInput.value))) {
-        
-        //ДОДЕЛАТЬ ВЫВОД ОШИБКИ
-        console.log('One of the values are not a number');
+        document.getElementById('error').innerHTML = "Вводимые значения не являются числами";
         validated = false;
       }
       
       else if ((input.value > 300 || input.value < 100) &&
           (secondInput.value > 300 || secondInput.value < 100)) {
-        
-        //ДОДЕЛАТЬ ВЫВОД ОШИБКИ
-        console.log('одно из чисел вне диапазона от 100 до 300')
+        document.getElementById('error').innerHTML = "одно из чисел вне диапазона от 100 до 300";
         validated = false;
       }
       return validated;
