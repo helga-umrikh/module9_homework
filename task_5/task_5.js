@@ -4,7 +4,6 @@
 // Заголовок второго input — «лимит».
 // Заголовок кнопки — «запрос».
 
-
 // При клике на кнопку происходит следующее:
 
 // Если число в первом input не попадает в диапазон от 1 до 10 или не является числом — выводить ниже текст «Номер страницы вне диапазона от 1 до 10»;
@@ -17,36 +16,81 @@
 // Если пользователь перезагрузил страницу, то ему должны показываться картинки из последнего успешно выполненного запроса (использовать localStorage).
 
 function get_random_image(){
-
-    url = `https://picsum.photos/${input.value}/${secondInput.value}`;
+  
+    const jsonString = localStorage.getItem('JSON');
     
-    if(validateInput()){
-        fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-          let imageElement = document.getElementById('image');
-          imageElement.src = URL.createObjectURL(blob);
-        })
-        .catch(function(error){
-          console.log("Error: " + error);
-        });
+    // if(jsonString) {
+    //   //выводит старые данные на экран
+    //   //ДОДЕЛАЙ ВЫВОД 
+    // }
   
-    } 
-  }
-  
-  
-  function validateInput() {
-      let validated = true;
-      if ((input.value === '' || isNaN(+input.value)) && 
-          (secondInput.value === '' || isNaN(+secondInput.value))) {
-        document.getElementById('error').innerHTML = "Вводимые значения не являются числами";
-        validated = false;
-      }
+  //запрос
+      url = ` https://picsum.photos/v2/list?page=${input.value}&limit=${secondInput.value}`;
       
-      else if ((input.value > 300 || input.value < 100) &&
-          (secondInput.value > 300 || secondInput.value < 100)) {
-        document.getElementById('error').innerHTML = "одно из чисел вне диапазона от 100 до 300";
-        validated = false;
+    
+    //чекает импуты
+      if (validateInput()) {
+        //все ок делаем запрос
+          fetch(url)
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => { 
+           localStorage.setItem('JSON', JSON.stringify(json));
+           return json; })
+        
+          .then(function displayResult(apiData) {
+                  let cards = '';
+                  apiData.forEach(item => {
+                    const cardBlock = `
+                      <div class="card">
+                        <img
+                          src="${item.download_url}"
+                          class="card-image"
+                        />
+                        <p>${item.author}</p>
+                      </div>
+                    `;
+                    cards = cards + cardBlock;
+                  });
+          const resultNode = document.querySelector(".j-result");
+          resultNode.innerHTML = cards;
+               })
+        
+          .catch(function(error){
+            console.log("Error: " + error);
+          })
       }
-      return validated;
     }
+  
+  
+  const resultNode = document.querySelector('.j-result');
+  
+    function validateInput() {
+        let validated = true;
+        if ((input.value === '' || isNaN(+input.value)) && 
+            (secondInput.value === '' || isNaN(+secondInput.value))) {
+          document.getElementById('error').innerHTML = "Вводимые значения не являются числами";
+          validated = false;
+        }
+        
+        else if (input.value > 10 || input.value < 1) {
+          document.getElementById('error').innerHTML = "Номер страницы вне диапазона от 1 до 10"
+          validated = false;
+          }
+      
+        else if (secondInput.value > 10 || secondInput.value < 1) {
+          document.getElementById('error').innerHTML = "Лимит вне диапазона от 1 до 10"
+          validated = false;
+        }
+        
+        else if ((input.value > 10 || input.value < 1) &&
+            (secondInput.value > 10 || secondInput.value < 1)) {
+          document.getElementById('error').innerHTML = "Номер страницы и лимит вне диапазона от 1 до 10";
+          validated = false;
+        }
+        return validated;
+      }
+  
+  
+  
