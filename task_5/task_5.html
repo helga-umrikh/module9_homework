@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <link href="./task_5.css" rel="stylesheet" type="text/css">
+        <title>Random Image</title>
+    </head>
+    <body>
+        <div id="container">
+            <img id="image"/>
+          <div id="input_container">
+            <label class="label">Номер страницы</label>
+            <input id="input" type="text" placeholder="Введите первое число" />
+            <label class="label">Лимит</label>
+            <input id="secondInput" type="text" placeholder="Введите второе число" >
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <div class='Numberbox'>
-        <label class="label" for="Page_number">Номер страницы</label>
-        <input class='input' type="number" id="tentacles" name="tentacles" placeholder="Enter the various number"></input>
-        <label class="label" for="limit">Лимит</label>
-        <input class='input' type="number" id="tentacles" name="tentacles" placeholder="Enter the various number"></input>
-        <input class='submit' type="submit" value="Запрос"></input>
-    </div>
-</body>
-
+            <button id="button" onclick="get_random_image()"> Запрос </button>
+            </div>
+            <div id ="error"></div>
+        </div>
+    </body>
+    <script src="task_5.js"></script>
 </html>
+
+
