@@ -15,14 +15,35 @@
 
 // Если пользователь перезагрузил страницу, то ему должны показываться картинки из последнего успешно выполненного запроса (использовать localStorage).
 
+
+function displayResult(apiData) {
+  let cards = '';
+  apiData.forEach(item => {
+    const cardBlock = `
+      <div class="card">
+        <img
+          src="${item.download_url}"
+          class="card-image"
+        />
+        <p>${item.author}</p>
+      </div>
+    `;
+    cards = cards + cardBlock;
+  });
+const resultNode = document.querySelector(".j-result");
+resultNode.innerHTML = cards;
+}
+
+window.onload = function() {
+  const jsonString = localStorage.getItem('JSON');
+  if (jsonString) {
+    let savedRequestOutput = JSON.parse(localStorage.getItem('JSON'));
+    let displayAgain = displayResult(savedRequestOutput)
+  }
+}
+
+
 function get_random_image(){
-  
-    const jsonString = localStorage.getItem('JSON');
-    
-    // if(jsonString) {
-    //   //выводит старые данные на экран
-    //   //ДОДЕЛАЙ ВЫВОД 
-    // }
   
   //запрос
       url = ` https://picsum.photos/v2/list?page=${input.value}&limit=${secondInput.value}`;
@@ -39,23 +60,7 @@ function get_random_image(){
            localStorage.setItem('JSON', JSON.stringify(json));
            return json; })
         
-          .then(function displayResult(apiData) {
-                  let cards = '';
-                  apiData.forEach(item => {
-                    const cardBlock = `
-                      <div class="card">
-                        <img
-                          src="${item.download_url}"
-                          class="card-image"
-                        />
-                        <p>${item.author}</p>
-                      </div>
-                    `;
-                    cards = cards + cardBlock;
-                  });
-          const resultNode = document.querySelector(".j-result");
-          resultNode.innerHTML = cards;
-               })
+          .then((apiData) => {displayResult(apiData)})
         
           .catch(function(error){
             console.log("Error: " + error);
